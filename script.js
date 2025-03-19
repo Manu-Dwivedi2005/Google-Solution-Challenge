@@ -1,104 +1,84 @@
-// Wait for DOM to be fully loaded
+// Initialize AOS
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+});
+
+// Password Toggle Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS (Animate On Scroll)
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100
-    });
-
-    // Handle loading indicator
-    const loadingIndicator = document.getElementById('loading');
-    if (loadingIndicator) {
-        // Hide loading indicator with fade effect
-        loadingIndicator.style.opacity = '0';
-        setTimeout(() => {
-            loadingIndicator.style.display = 'none';
-        }, 500);
+    // Login password toggle
+    const togglePassword = document.getElementById('togglePassword');
+    const loginPassword = document.getElementById('loginPassword');
+    
+    if (togglePassword && loginPassword) {
+        togglePassword.addEventListener('click', function() {
+            const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            loginPassword.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
     }
 
-    // Password Toggle Functionality
-    function setupPasswordToggle(toggleId, passwordId) {
-        const toggleButton = document.getElementById(toggleId);
-        const passwordInput = document.getElementById(passwordId);
-        
-        if (toggleButton && passwordInput) {
-            toggleButton.addEventListener('click', function() {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                this.querySelector('i').classList.toggle('fa-eye');
-                this.querySelector('i').classList.toggle('fa-eye-slash');
-            });
-        }
-    }
-
-    // Setup password toggles
-    setupPasswordToggle('togglePassword', 'loginPassword');
-    setupPasswordToggle('toggleSignupPassword', 'signupPassword');
-
-    // Password Strength Checker
+    // Signup password toggle
+    const toggleSignupPassword = document.getElementById('toggleSignupPassword');
     const signupPassword = document.getElementById('signupPassword');
-    const passwordStrength = document.getElementById('passwordStrength');
+    
+    if (toggleSignupPassword && signupPassword) {
+        toggleSignupPassword.addEventListener('click', function() {
+            const type = signupPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            signupPassword.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+    }
+
+    // Password strength checker
+    const signupPasswordInput = document.getElementById('signupPassword');
+    const passwordStrengthIndicator = document.getElementById('passwordStrength');
     const progressBar = document.querySelector('.password-strength .progress-bar');
 
-    if (signupPassword && passwordStrength && progressBar) {
-        signupPassword.addEventListener('input', function() {
+    if (signupPasswordInput && passwordStrengthIndicator && progressBar) {
+        signupPasswordInput.addEventListener('input', function() {
             const password = this.value;
             let strength = 0;
-            let strengthText = 'Weak';
-            let strengthColor = 'bg-danger';
+            let color = '';
 
-            // Check password strength
-            if (password.length >= 8) strength++;
-            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
-            if (password.match(/\d/)) strength++;
-            if (password.match(/[^a-zA-Z\d]/)) strength++;
+            // Length check
+            if (password.length >= 8) strength += 25;
 
-            // Update strength indicator
-            switch(strength) {
-                case 0:
-                    strengthText = 'Weak';
-                    strengthColor = 'bg-danger';
-                    break;
-                case 1:
-                    strengthText = 'Fair';
-                    strengthColor = 'bg-warning';
-                    break;
-                case 2:
-                    strengthText = 'Good';
-                    strengthColor = 'bg-info';
-                    break;
-                case 3:
-                    strengthText = 'Strong';
-                    strengthColor = 'bg-success';
-                    break;
-                case 4:
-                    strengthText = 'Very Strong';
-                    strengthColor = 'bg-success';
-                    break;
+            // Contains number
+            if (/\d/.test(password)) strength += 25;
+
+            // Contains letter
+            if (/[a-zA-Z]/.test(password)) strength += 25;
+
+            // Contains special character
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength += 25;
+
+            // Update progress bar
+            progressBar.style.width = strength + '%';
+
+            // Update strength text and color
+            if (strength <= 25) {
+                color = '#dc3545';
+                passwordStrengthIndicator.textContent = 'Weak';
+            } else if (strength <= 50) {
+                color = '#ffc107';
+                passwordStrengthIndicator.textContent = 'Medium';
+            } else if (strength <= 75) {
+                color = '#17a2b8';
+                passwordStrengthIndicator.textContent = 'Strong';
+            } else {
+                color = '#28a745';
+                passwordStrengthIndicator.textContent = 'Very Strong';
             }
 
-            passwordStrength.textContent = strengthText;
-            progressBar.style.width = `${(strength / 4) * 100}%`;
-            progressBar.className = `progress-bar ${strengthColor}`;
+            progressBar.style.backgroundColor = color;
         });
     }
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Handle Login Form Submission
+    // Form submissions
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
@@ -107,31 +87,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('loginPassword').value;
             const rememberMe = document.getElementById('rememberMe').checked;
 
-            // Basic validation
-            if (!email || !password) {
-                showAlert('Please fill in all fields', 'danger');
-                return;
-            }
-
             // Here you would typically make an API call to your backend
             console.log('Login attempt:', { email, password, rememberMe });
             
-            // Simulate API call
-            showAlert('Logging in...', 'info');
-            
-            setTimeout(() => {
-                // For demo purposes, show success message
-                showAlert('Login successful!', 'success');
-                const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-                loginModal.hide();
-                
-                // Update UI to show logged in state
-                updateLoginState(true);
-            }, 1500);
+            // Show success message
+            alert('Login successful!');
         });
     }
 
-    // Handle Signup Form Submission
     const signupForm = document.getElementById('signupForm');
     if (signupForm) {
         signupForm.addEventListener('submit', function(e) {
@@ -142,82 +105,26 @@ document.addEventListener('DOMContentLoaded', function() {
             const confirmPassword = document.getElementById('confirmPassword').value;
             const termsAccepted = document.getElementById('termsCheck').checked;
 
-            // Validation
-            if (!name || !email || !password || !confirmPassword) {
-                showAlert('Please fill in all fields', 'danger');
-                return;
-            }
-
             if (password !== confirmPassword) {
-                showAlert('Passwords do not match!', 'danger');
+                alert('Passwords do not match!');
                 return;
             }
 
             if (!termsAccepted) {
-                showAlert('Please accept the terms and conditions', 'danger');
+                alert('Please accept the terms and conditions');
                 return;
             }
 
             // Here you would typically make an API call to your backend
-            console.log('Signup attempt:', { name, email, password });
+            console.log('Signup attempt:', { name, email, password, termsAccepted });
             
-            // Simulate API call
-            showAlert('Creating account...', 'info');
-            
-            setTimeout(() => {
-                // For demo purposes, show success message
-                showAlert('Account created successfully!', 'success');
-                const signupModal = bootstrap.Modal.getInstance(document.getElementById('signupModal'));
-                signupModal.hide();
-                
-                // Update UI to show logged in state
-                updateLoginState(true);
-            }, 1500);
+            // Show success message
+            alert('Account created successfully!');
+            window.location.href = 'login.html';
         });
     }
 
-    // Handle Social Login
-    document.querySelectorAll('.btn-outline-dark, .btn-outline-primary').forEach(button => {
-        button.addEventListener('click', function() {
-            const provider = this.querySelector('i').classList.contains('fa-google') ? 'Google' : 'Facebook';
-            showAlert(`Logging in with ${provider}...`, 'info');
-            // Here you would implement actual social login
-        });
-    });
-
-    // Alert Function
-    function showAlert(message, type) {
-        const alertDiv = document.createElement('div');
-        alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
-        alertDiv.innerHTML = `
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        `;
-        
-        const modalBody = document.querySelector('.modal-body');
-        modalBody.insertBefore(alertDiv, modalBody.firstChild);
-        
-        // Auto dismiss after 3 seconds
-        setTimeout(() => {
-            alertDiv.remove();
-        }, 3000);
-    }
-
-    // Update Login State
-    function updateLoginState(isLoggedIn) {
-        const loginBtn = document.querySelector('[data-bs-target="#loginModal"]');
-        const signupBtn = document.querySelector('[data-bs-target="#signupModal"]');
-        
-        if (isLoggedIn) {
-            loginBtn.innerHTML = '<i class="fas fa-user me-2"></i>My Account';
-            signupBtn.style.display = 'none';
-        } else {
-            loginBtn.innerHTML = 'Login';
-            signupBtn.style.display = 'block';
-        }
-    }
-
-    // Handle Contact Form Submission
+    // Contact form submission
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -229,13 +136,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // Here you would typically make an API call to your backend
             console.log('Contact form submission:', { name, email, message });
             
-            // For demo purposes, show success message
+            // Show success message and reset form
             alert('Message sent successfully!');
             this.reset();
         });
     }
 
-    // Handle Image Upload
+    // Image upload handling
     const uploadForm = document.getElementById('uploadForm');
     if (uploadForm) {
         uploadForm.addEventListener('submit', function(e) {
@@ -249,9 +156,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Here you would typically make an API call to your backend
-            console.log('Image upload attempt:', { plantType, imageFile });
-            
-            // For demo purposes, show loading state
+            console.log('Image upload:', { plantType, imageFile });
+
+            // Show loading state
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = `
                 <div class="text-center">
@@ -262,18 +169,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
 
-            // Simulate API call delay
+            // Simulate API call
             setTimeout(() => {
                 resultsDiv.innerHTML = `
-                    <div class="text-center">
-                        <i class="fas fa-check-circle text-success fa-3x mb-3"></i>
+                    <div class="alert alert-success">
                         <h5>Analysis Complete</h5>
-                        <p>No diseases detected in the image.</p>
+                        <p>Plant Type: ${plantType}</p>
+                        <p>Status: Healthy</p>
+                        <p>Confidence: 98%</p>
                     </div>
                 `;
             }, 2000);
         });
     }
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 
     // Navbar scroll effect
     window.addEventListener('scroll', function() {
@@ -284,138 +206,137 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.classList.remove('navbar-scrolled');
         }
     });
+});
 
-    // Add animation on scroll
-    const animateOnScroll = () => {
-        const elements = document.querySelectorAll('.card, .btn, .form-control');
-        
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementBottom = element.getBoundingClientRect().bottom;
+// Handle Consultation Form Submission
+document.addEventListener('DOMContentLoaded', function() {
+    const consultationForm = document.getElementById('consultationForm');
+    if (consultationForm) {
+        consultationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            if (elementTop < window.innerHeight && elementBottom > 0) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }
-        });
-    };
+            // Get form data
+            const expertType = document.getElementById('expertType').value;
+            const consultationDate = document.getElementById('consultationDate').value;
+            const consultationTime = document.getElementById('consultationTime').value;
+            const consultationNotes = document.getElementById('consultationNotes').value;
 
-    // Initialize animation styles
-    document.querySelectorAll('.card, .btn, .form-control').forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'all 0.5s ease-out';
+            // Here you would typically send this data to your backend
+            // For now, we'll just show a success message
+            alert('Thank you for booking a consultation! We will contact you shortly to confirm your appointment.');
+            consultationForm.reset();
+        });
+    }
+});
+
+// Forum Post Creation
+function createForumPost() {
+    // This would be implemented when the backend is ready
+    console.log('Forum post creation functionality will be implemented with backend integration');
+}
+
+// Knowledge Base Search
+function searchKnowledgeBase(query) {
+    // This would be implemented when the backend is ready
+    console.log('Knowledge base search functionality will be implemented with backend integration');
+}
+
+// Expert Availability Check
+function checkExpertAvailability(expertId, date) {
+    // This would be implemented when the backend is ready
+    console.log('Expert availability check functionality will be implemented with backend integration');
+}
+
+// Handle Forum Topic Navigation
+document.addEventListener('DOMContentLoaded', function() {
+    const forumTopics = document.querySelectorAll('.list-group-item-action');
+    forumTopics.forEach(topic => {
+        topic.addEventListener('click', function(e) {
+            e.preventDefault();
+            const topicName = this.querySelector('h6').textContent;
+            // This would be implemented when the backend is ready
+            console.log(`Navigating to topic: ${topicName}`);
+        });
+    });
+});
+
+// Handle Knowledge Base Resource Navigation
+document.addEventListener('DOMContentLoaded', function() {
+    const resourceButtons = document.querySelectorAll('.btn-outline-success');
+    resourceButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const resourceType = this.textContent.trim();
+            // This would be implemented when the backend is ready
+            console.log(`Navigating to resource type: ${resourceType}`);
+        });
+    });
+});
+
+// Form Validation
+function validateForm(formId) {
+    const form = document.getElementById(formId);
+    if (!form) return false;
+
+    const requiredFields = form.querySelectorAll('[required]');
+    let isValid = true;
+
+    requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+            isValid = false;
+            field.classList.add('is-invalid');
+        } else {
+            field.classList.remove('is-invalid');
+        }
     });
 
-    // Add scroll event listener
-    window.addEventListener('scroll', animateOnScroll);
-    // Initial animation check
-    animateOnScroll();
+    return isValid;
+}
 
-    // Form Validation Functions
-    function validateEmail(email) {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
+// Handle Image Upload for Forum Posts
+function handleImageUpload(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // This would be implemented when the backend is ready
+            console.log('Image upload functionality will be implemented with backend integration');
+        };
+        reader.readAsDataURL(input.files[0]);
     }
+}
 
-    function validatePassword(password) {
-        return password.length >= 8;
-    }
+// Handle User Authentication
+function handleLogin(event) {
+    event.preventDefault();
+    // This would be implemented when the backend is ready
+    console.log('Login functionality will be implemented with backend integration');
+}
 
-    function updateInputValidation(input, isValid) {
-        input.classList.remove('is-valid', 'is-invalid');
-        input.classList.add(isValid ? 'is-valid' : 'is-invalid');
-        return isValid;
-    }
+function handleSignup(event) {
+    event.preventDefault();
+    // This would be implemented when the backend is ready
+    console.log('Signup functionality will be implemented with backend integration');
+}
 
-    // Real-time validation for login form
-    const loginEmail = document.getElementById('loginEmail');
-    const loginPassword = document.getElementById('loginPassword');
+// Handle Real-time Updates
+function initializeRealTimeUpdates() {
+    // This would be implemented when the backend is ready
+    console.log('Real-time updates functionality will be implemented with backend integration');
+}
 
-    if (loginEmail && loginPassword) {
-        loginEmail.addEventListener('input', function() {
-            updateInputValidation(this, validateEmail(this.value));
-        });
+// Initialize all event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize real-time updates
+    initializeRealTimeUpdates();
 
-        loginPassword.addEventListener('input', function() {
-            updateInputValidation(this, validatePassword(this.value));
-        });
-    }
-
-    // Real-time validation for signup form
-    const signupNameInput = document.getElementById('signupName');
-    const signupEmailInput = document.getElementById('signupEmail');
-    const signupPasswordInput = document.getElementById('signupPassword');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-
-    if (signupNameInput && signupEmailInput && signupPasswordInput && confirmPasswordInput) {
-        signupNameInput.addEventListener('input', function() {
-            updateInputValidation(this, this.value.length >= 2);
-        });
-
-        signupEmailInput.addEventListener('input', function() {
-            updateInputValidation(this, validateEmail(this.value));
-        });
-
-        signupPasswordInput.addEventListener('input', function() {
-            const isValid = validatePassword(this.value);
-            updateInputValidation(this, isValid);
-            
-            // Update password strength indicator
-            if (passwordStrength && progressBar) {
-                const strength = calculatePasswordStrength(this.value);
-                updatePasswordStrength(strength);
+    // Add form validation to all forms
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (!validateForm(this.id)) {
+                e.preventDefault();
+                alert('Please fill in all required fields');
             }
         });
-
-        confirmPasswordInput.addEventListener('input', function() {
-            const isValid = this.value === signupPasswordInput.value && this.value.length >= 8;
-            updateInputValidation(this, isValid);
-        });
-    }
-
-    // Password strength calculation
-    function calculatePasswordStrength(password) {
-        let strength = 0;
-        if (password.length >= 8) strength++;
-        if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
-        if (password.match(/\d/)) strength++;
-        if (password.match(/[^a-zA-Z\d]/)) strength++;
-        return strength;
-    }
-
-    function updatePasswordStrength(strength) {
-        const strengthText = document.getElementById('passwordStrength');
-        const progressBar = document.querySelector('.password-strength .progress-bar');
-        
-        let strengthLabel, strengthColor;
-        switch(strength) {
-            case 0:
-                strengthLabel = 'Weak';
-                strengthColor = 'bg-danger';
-                break;
-            case 1:
-                strengthLabel = 'Fair';
-                strengthColor = 'bg-warning';
-                break;
-            case 2:
-                strengthLabel = 'Good';
-                strengthColor = 'bg-info';
-                break;
-            case 3:
-                strengthLabel = 'Strong';
-                strengthColor = 'bg-success';
-                break;
-            case 4:
-                strengthLabel = 'Very Strong';
-                strengthColor = 'bg-success';
-                break;
-        }
-
-        if (strengthText) strengthText.textContent = strengthLabel;
-        if (progressBar) {
-            progressBar.style.width = `${(strength / 4) * 100}%`;
-            progressBar.className = `progress-bar ${strengthColor}`;
-        }
-    }
+    });
 }); 
