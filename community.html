@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmTech Community - Connect with Farmers</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-leaf me-2"></i>FarmTech
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#disease-detection">Disease Detection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#technology">Technology</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="community.html">Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-light me-2">Login</a>
+                    <a href="signup.html" class="btn btn-light">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Community Hero Section -->
+    <section class="py-5 mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6" data-aos="fade-right">
+                    <h1 class="display-4 fw-bold text-success">Join Our Farming Community</h1>
+                    <p class="lead">Connect with fellow farmers, share experiences, and learn from experts in the field.</p>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Farming Community" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Features -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <!-- Forum Section -->
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <i class="fas fa-comments text-success me-2"></i>Community Forum
+                            </h3>
+                            <p class="card-text">Join discussions with fellow farmers about farming techniques, challenges, and solutions.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Topic-based discussions</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Share experiences</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Get advice from peers</li>
+                            </ul>
+                            <a href="#forum" class="btn btn-success mt-3">Browse Forum</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Knowledge Base Section -->
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <i class="fas fa-book text-success me-2"></i>Knowledge Base
+                            </h3>
+                            <p class="card-text">Access comprehensive guides, tutorials, and best practices for modern farming.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Farming guides</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Video tutorials</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Expert articles</li>
+                            </ul>
+                            <a href="#knowledge-base" class="btn btn-success mt-3">Explore Resources</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expert Consultation Section -->
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <i class="fas fa-user-tie text-success me-2"></i>Expert Consultation
+                            </h3>
+                            <p class="card-text">Connect with agricultural experts for personalized advice and guidance.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>One-on-one sessions</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Video consultations</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Expert reviews</li>
+                            </ul>
+                            <a href="#experts" class="btn btn-success mt-3">Book Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forum Section -->
+    <section id="forum" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Community Forum</h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <!-- Forum Categories -->
+                    <div class="card mb-4" data-aos="fade-up">
+                        <div class="card-body">
+                            <h5 class="card-title">Popular Topics</h5>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Crop Management
+                                    <span class="badge bg-success rounded-pill">24</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Pest Control
+                                    <span class="badge bg-success rounded-pill">18</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Technology Integration
+                                    <span class="badge bg-success rounded-pill">15</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Market Prices
+                                    <span class="badge bg-success rounded-pill">12</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Discussions -->
+                    <div class="card" data-aos="fade-up">
+                        <div class="card-body">
+                            <h5 class="card-title">Recent Discussions</h5>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Best practices for organic farming</h6>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Looking for advice on transitioning to organic farming methods...</p>
+                                    <small class="text-muted">Posted by John Doe</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Smart irrigation system recommendations</h6>
+                                        <small class="text-muted">5 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Need suggestions for automated irrigation systems...</p>
+                                    <small class="text-muted">Posted by Jane Smith</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Knowledge Base Section -->
+    <section id="knowledge-base" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Knowledge Base</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Farming Guide">
+                        <div class="card-body">
+                            <h5 class="card-title">Farming Guides</h5>
+                            <p class="card-text">Comprehensive guides covering various aspects of modern farming.</p>
+                            <a href="#" class="btn btn-outline-success">View Guides</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Video Tutorials">
+                        <div class="card-body">
+                            <h5 class="card-title">Video Tutorials</h5>
+                            <p class="card-text">Step-by-step video tutorials for practical farming techniques.</p>
+                            <a href="#" class="btn btn-outline-success">Watch Videos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Expert Articles">
+                        <div class="card-body">
+                            <h5 class="card-title">Expert Articles</h5>
+                            <p class="card-text">In-depth articles written by agricultural experts.</p>
+                            <a href="#" class="btn btn-outline-success">Read Articles</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expert Consultation Section -->
+    <section id="experts" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Book Expert Consultation</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card" data-aos="fade-up">
+                        <div class="card-body">
+                            <form id="consultationForm">
+                                <div class="mb-3">
+                                    <label for="expertType" class="form-label">Expert Type</label>
+                                    <select class="form-select" id="expertType" required>
+                                        <option value="">Select expert type</option>
+                                        <option value="crop">Crop Specialist</option>
+                                        <option value="technology">Technology Expert</option>
+                                        <option value="pest">Pest Control Expert</option>
+                                        <option value="soil">Soil Specialist</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="consultationDate" class="form-label">Preferred Date</label>
+                                    <input type="date" class="form-control" id="consultationDate" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="consultationTime" class="form-label">Preferred Time</label>
+                                    <input type="time" class="form-control" id="consultationTime" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="consultationNotes" class="form-label">Additional Notes</label>
+                                    <textarea class="form-control" id="consultationNotes" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success">Book Consultation</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>FarmTech</h5>
+                    <p>Smart farming solutions for a better future</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h5>Contact</h5>
+                    <p>Email: info@farmtech.com<br>Phone: (555) 123-4567</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
