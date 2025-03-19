@@ -35,151 +35,22 @@
                         <a class="nav-link" href="#technology">Technology</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="community.html">Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</button>
+                    <a href="login.html" class="btn btn-outline-light me-2">Login</a>
+                    <a href="signup.html" class="btn btn-light">Sign Up</a>
                 </div>
             </div>
         </div>
     </nav>
-
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title">Welcome Back!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="loginForm">
-                        <div class="mb-3">
-                            <label for="loginEmail" class="form-label">Email Address</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="loginPassword" class="form-label">Password</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
-                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Remember me</label>
-                            </div>
-                            <a href="#" class="text-success text-decoration-none">Forgot Password?</a>
-                        </div>
-                        <button type="submit" class="btn btn-success w-100 mb-3">Login</button>
-                        
-                        <div class="text-center mb-3">
-                            <span class="text-muted">Or login with</span>
-                        </div>
-                        
-                        <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-outline-dark">
-                                <i class="fab fa-google me-2"></i> Google
-                            </button>
-                            <button type="button" class="btn btn-outline-primary">
-                                <i class="fab fa-facebook me-2"></i> Facebook
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer border-0 justify-content-center">
-                    <p class="mb-0">Don't have an account? <a href="#" class="text-success text-decoration-none" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Sign up</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Signup Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title">Create Account</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="signupForm">
-                        <div class="mb-3">
-                            <label for="signupName" class="form-label">Full Name</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" id="signupName" placeholder="Enter your full name" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signupEmail" class="form-label">Email Address</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signupPassword" class="form-label">Password</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                <input type="password" class="form-control" id="signupPassword" placeholder="Create a password" required>
-                                <button class="btn btn-outline-secondary" type="button" id="toggleSignupPassword">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                            <div class="password-strength mt-2">
-                                <div class="progress" style="height: 5px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
-                                </div>
-                                <small class="text-muted">Password strength: <span id="passwordStrength">Weak</span></small>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Confirm Password</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="termsCheck" required>
-                                <label class="form-check-label" for="termsCheck">
-                                    I agree to the <a href="#" class="text-success text-decoration-none">Terms of Service</a> and <a href="#" class="text-success text-decoration-none">Privacy Policy</a>
-                                </label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-success w-100 mb-3">Create Account</button>
-                        
-                        <div class="text-center mb-3">
-                            <span class="text-muted">Or sign up with</span>
-                        </div>
-                        
-                        <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-outline-dark">
-                                <i class="fab fa-google me-2"></i> Google
-                            </button>
-                            <button type="button" class="btn btn-outline-primary">
-                                <i class="fab fa-facebook me-2"></i> Facebook
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer border-0 justify-content-center">
-                    <p class="mb-0">Already have an account? <a href="#" class="text-success text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Login</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
